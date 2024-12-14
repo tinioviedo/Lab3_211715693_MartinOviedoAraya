@@ -1,0 +1,26 @@
+package TDAs;
+
+import java.util.Locale;
+
+public class Piece {
+    //mi idea es hacer este constructor, creando una ficha que solo pueda ser "red" o "yellow" .
+    private String color;
+
+    /**
+     * Crea una ficha con el color especificado.
+     * RF04
+     *
+     * @param color Color de la ficha (red o yellow).
+     */
+    public Piece(String color) {
+        //validar color
+        if (!"red".equalsIgnoreCase(color) && !"yellow".equalsIgnoreCase(color)) {
+            throw new IllegalArgumentException("Piece color must be either 'red' or 'yellow'");
+        }
+        this.color = color.toLowerCase();
+    }
+}
+
+
+
+
