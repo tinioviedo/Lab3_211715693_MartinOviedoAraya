@@ -4,22 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-    private List<List<Integer>> board; // Lista de listas para representar el tablero
+    private List<List<Integer>> board;
 
-    /**
-     * Constructor board
-     */
     public Board() {
-        board = new ArrayList<>();  // Inicializar tablero
+        board = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {  // de 6 filas
-            List<Integer> row = new ArrayList<>();  // donde cada una de las filas corresponde a una lista
-            for (int j = 0; j < 7; j++) {  // se inicializan 7 columnas con 0
+        for (int i = 0; i < 6; i++) {
+            List<Integer> row = new ArrayList<>();
+            for (int j = 0; j < 7; j++) {
                 row.add(0);
             }
-            board.add(row);  // Agregamos la fila al tablero
+            board.add(row);
         }
     }
 
-    // metodos
+    public boolean sePuedeJugar() {
+        for (List<Integer> row : board) {  // Recorremos cada fila del tablero
+            if (row.contains(0)) {  // Si hay un 0 en la fila
+                return true;
+            }
+        }
+        return false;  // no encuentra 0 , retorna falso
+    }
 }
