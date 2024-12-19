@@ -52,6 +52,7 @@ public class Board {
         }
         return false;  // no encuentra un espacio vacio , retorna falso
     }
+
     /**
      * RF07
      * Método para jugar una ficha en el tablero.
@@ -64,16 +65,83 @@ public class Board {
         }
 
         for (int row = 5; row >= 0; row--) {
-            if (board.get(row).get(column) == null) {;
+            if (board.get(row).get(column) == null) {
+                ;
                 board.get(row).set(column, piece);
                 return true;
             }
         }
         return false;
     }
+
     /**
      * Método auxiliar para obtener la pieza en una posición
      */
     private Piece getPosition(int row, int col) {
         return board.get(row).get(col);
     }
+
+    /**
+     * RF08
+     * Método para verificar si hay una victoria vertical en el tablero.
+     */
+    public String verificarVictoriaVertical() {
+        // Recorrer cada columna
+        for (int col = 0; col < 7; col++) {
+            // Verificar secuencias de 4 desde la fila 0 hasta la 2
+            for (int row = 0; row <= 2; row++) {
+                Piece actualPiece = getPosition(row, col);
+                // Si la posición actual está vacía, continuar con la siguiente
+                if (actualPiece == null) continue;
+
+                // Obtener las siguientes piezas
+                Piece piece1 = getPosition(row + 1, col);
+                Piece piece2 = getPosition(row + 2, col);
+                Piece piece3 = getPosition(row + 3, col);
+
+                // Verificar que ninguna sea null antes de comparar
+                if (piece1 == null || piece2 == null || piece3 == null) continue;
+
+
+                // Verificar si hay 4 fichas consecutivas del mismo color
+                if (actualPiece.getColor().equals(getPosition(row + 1, col).getColor()) &&
+                        actualPiece.getColor().equals(getPosition(row + 2, col).getColor()) &&
+                        actualPiece.getColor().equals(getPosition(row + 3, col).getColor())) {
+                    return actualPiece.getColor();
+                }
+            }
+        }
+        return "No hay ganador";
+    }
+
+    /**
+     * RF09
+     * Método para verificar si hay una victoria horizontal en el tablero.
+     */
+    public String verificarVictoriaHorizontal() {
+        // Recorrer cada fila
+        for (int row = 0; row < 6; row++) {
+            // Verificar secuencias de 4 en cada fila desde la columna 0 hasta la 3
+            for (int col = 0; col <= 3; col++) {
+                Piece actualPiece = getPosition(row, col);
+                // Si la posición actual está vacía, continuar con la siguiente
+                if (actualPiece == null) continue;
+
+                // Obtener las siguientes piezas
+                Piece piece1 = getPosition(row, col + 1);
+                Piece piece2 = getPosition(row, col + 2);
+                Piece piece3 = getPosition(row, col + 3);
+                // Verificar que ninguna sea null antes de comparar
+                if (piece1 == null || piece2 == null || piece3 == null) continue;
+
+                // Verificar si hay 4 fichas consecutivas del mismo color
+                if (actualPiece.getColor().equals(getPosition(row, col + 1).getColor()) &&
+                        actualPiece.getColor().equals(getPosition(row, col + 2).getColor()) &&
+                        actualPiece.getColor().equals(getPosition(row, col + 3).getColor())) {
+                    return actualPiece.getColor();
+                }
+            }
+        }
+        return "No hay ganador";
+    }
+}

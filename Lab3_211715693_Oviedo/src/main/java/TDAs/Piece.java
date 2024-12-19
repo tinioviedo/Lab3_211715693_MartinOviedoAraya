@@ -15,8 +15,12 @@ public class Piece {
     public Piece(String color) {
         //validar color
         if (!"red".equalsIgnoreCase(color) && !"yellow".equalsIgnoreCase(color)) {
-            throw new IllegalArgumentException("Piece color must be either 'red' or 'yellow'");
+            throw new IllegalArgumentException("Color ingresado debe ser 'red' or 'yellow'");
         }
         this.color = color.toLowerCase();
+    }
+
+    public String getColor() {
+        return color;
     }
 }
