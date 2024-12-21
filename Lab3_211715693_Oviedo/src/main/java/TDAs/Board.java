@@ -144,4 +144,76 @@ public class Board {
         }
         return "No hay ganador";
     }
+    /**
+     * RF10 - Método para verificar si hay una victoria diagonal en el tablero.
+     */
+    public String verificarVictoriaDiagonal() {
+        // Verificar diagonales ascendentes
+        for (int row = 3; row < 6; row++) {
+            for (int col = 0; col <= 3; col++) {
+                Piece actualPiece = getPosition(row, col);
+                if (actualPiece == null) continue;
+
+
+                // Obtener las siguientes 3 piezas diagonales ascendentes
+                Piece diag1 = getPosition(row - 1, col + 1);
+                Piece diag2 = getPosition(row - 2, col + 2);
+                Piece diag3 = getPosition(row - 3, col + 3);
+
+                // Verificar que ninguna de las piezas sea null antes de comparar
+                if (diag1 == null || diag2 == null || diag3 == null) continue;
+
+                if (actualPiece.getColor().equals(diag1.getColor()) &&
+                        actualPiece.getColor().equals(diag2.getColor()) &&
+                        actualPiece.getColor().equals(diag3.getColor())) {
+                    return actualPiece.getColor();
+                }
+            }
+        }
+
+        // Verificar diagonales descendentes
+        for (int row = 0; row <= 2; row++) {
+            for (int col = 0; col <= 3; col++) {
+                Piece actualPiece = getPosition(row, col);
+                if (actualPiece == null) continue;
+
+                // Obtener las siguientes 3 piezas diagonales descendentes
+                Piece diag1 = getPosition(row + 1, col + 1);
+                Piece diag2 = getPosition(row + 2, col + 2);
+                Piece diag3 = getPosition(row + 3, col + 3);
+
+                // Verificar que ninguna de las piezas sea null antes de comparar
+                if (diag1 == null || diag2 == null || diag3 == null) continue;
+
+                if (actualPiece.getColor().equals(diag1.getColor()) &&
+                        actualPiece.getColor().equals(diag2.getColor()) &&
+                        actualPiece.getColor().equals(diag3.getColor())) {
+                    return actualPiece.getColor();
+                }
+            }
+        }
+        return "No hay ganador";
+    }
+
+    /**
+     * RF11 - Método para entregar el ganador verificando todas las posibles condiciones de victoria.
+     */
+    public String entregarGanador() {
+        String verticalWinner = verificarVictoriaVertical();
+        if (!"No hay ganador".equals(verticalWinner)) {
+            return verticalWinner;
+        }
+
+        String horizontalWinner = verificarVictoriaHorizontal();
+        if (!"No hay ganador".equals(horizontalWinner)) {
+            return horizontalWinner;
+        }
+
+        String diagonalWinner = verificarVictoriaDiagonal();
+        if (!"No hay ganador".equals(diagonalWinner)) {
+            return diagonalWinner;
+        }
+
+        return "No hay ganador";
+    }
 }
