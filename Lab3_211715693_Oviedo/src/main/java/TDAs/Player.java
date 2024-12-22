@@ -10,17 +10,9 @@ public class Player {
     private int draws;
     private int remainingPieces;
 
-
     /**
-     *
      * RF03
-     * @param id
-     * @param name
-     * @param color
-     * @param wins
-     * @param losses
-     * @param draws
-     * @param remainingPieces
+     * Constructor para crear un jugador.
      */
 
     public Player(int id, String name, String color, int wins, int losses, int draws, int remainingPieces) {
@@ -37,9 +29,22 @@ public class Player {
         this.losses = losses;
         this.draws = draws;
         this.remainingPieces = remainingPieces;
-        System.out.println();
     }
     //Metodos
+
+    /**
+     * RF15 - Actualiza las estadísticas del jugador ya sea victoria, derrota o empate
+     */
+    public void actualizarEstadisticas(String resultado) {
+        if ("wins".equals(resultado)) {
+            this.wins++;
+        } else if ("losses".equals(resultado)) {
+            this.losses++;
+        } else if ("draws".equals(resultado)) {
+            this.draws++;
+        }
+    }
+
     //Getters
     public String getName() {
         return name;

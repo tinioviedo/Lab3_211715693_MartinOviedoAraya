@@ -33,4 +33,21 @@ public class Game {
         }
         return enumeratedHistory;
     }
+
+    /**
+     * RF14 - Metodo que verifica si el estado actual del juego es empate
+     */
+    public boolean esEmpate() {
+        // Verificar si ambos jugadores se quedaron sin fichas
+        if (player1.getRemainingPieces() == 0 && player2.getRemainingPieces() == 0) {
+            return true;
+        }
+
+        // Verificar si el tablero está lleno (no se pueden realizar más jugadas)
+        if (!board.sePuedeJugar()) {
+            return true;
+        }
+
+        return false;
+    }
 }
