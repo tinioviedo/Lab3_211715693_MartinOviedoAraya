@@ -3,7 +3,7 @@ package TDAs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Board implements IBoard {
     private List<List<Piece>> board;
 
     /**
@@ -50,6 +50,7 @@ public class Board {
      * RF06
      * Método para verificar si se puede jugar.
      */
+    @Override
     public boolean sePuedeJugar() {
         for (List<Piece> row : board) {  // Recorremos cada fila del tablero
             if (row.contains(null)) {  // Si hay un espacio vacio en la fila
@@ -62,6 +63,7 @@ public class Board {
      * RF07
      * Método para jugar una ficha en el tablero.
      */
+    @Override
     public boolean jugarFicha(int column, Piece piece) {
 
         // Verificar si la columna es válida
@@ -80,6 +82,7 @@ public class Board {
     /**
      * Método auxiliar para obtener la pieza en una posición
      */
+
     private Piece getPosition(int row, int col) {
         return board.get(row).get(col);
     }
@@ -89,6 +92,7 @@ public class Board {
      * RF08
      * Método para verificar si hay una victoria vertical en el tablero.
      */
+    @Override
     public String verificarVictoriaVertical() {
         // Recorrer cada columna
         for (int col = 0; col < 7; col++) {
@@ -121,6 +125,7 @@ public class Board {
      * RF09
      * Método para verificar si hay una victoria horizontal en el tablero.
      */
+    @Override
     public String verificarVictoriaHorizontal() {
         // Recorrer cada fila
         for (int row = 0; row < 6; row++) {
@@ -150,6 +155,7 @@ public class Board {
     /**
      * RF10 - Método para verificar si hay una victoria diagonal en el tablero.
      */
+    @Override
     public String verificarVictoriaDiagonal() {
         // Verificar diagonales ascendentes
         for (int row = 3; row < 6; row++) {
@@ -201,6 +207,7 @@ public class Board {
     /**
      * RF11 - Método para entregar el ganador verificando todas las posibles condiciones de victoria.
      */
+    @Override
     public String entregarGanador() {
         String verticalWinner = verificarVictoriaVertical();
         if (!"No hay ganador".equals(verticalWinner)) {
@@ -225,6 +232,7 @@ public class Board {
      * @param column La columna donde el jugador intenta colocar una ficha.
      * @return true si hay espacio en la columna para colocar una ficha, false si no.
      */
+    @Override
     public boolean sePuedeJugarEnColumna(int column) {
         // Verificar si la columna es válida
         if (column < 0 || column >= 7) {

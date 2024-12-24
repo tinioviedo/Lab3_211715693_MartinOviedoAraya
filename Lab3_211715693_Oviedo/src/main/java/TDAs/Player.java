@@ -1,6 +1,6 @@
 package TDAs;
 
-public class Player {
+public class Player implements IPlayer{
     //atributos
     private int id;
     private String name;
@@ -31,8 +31,6 @@ public class Player {
         this.remainingPieces = remainingPieces;
     }
     //Metodos
-
-
 
     @Override
     public String toString() {

@@ -1,8 +1,6 @@
 package TDAs;
 
-import java.util.Locale;
-
-public class Piece {
+public class Piece implements IPiece {
     //mi idea es hacer este constructor, creando una ficha que solo pueda ser "red" o "yellow" .
     private String color;
 
@@ -19,8 +17,12 @@ public class Piece {
         }
         this.color = color.toLowerCase();
     }
-
+    @Override
     public String getColor() {
         return color;
     }
 }
+
+
+
+

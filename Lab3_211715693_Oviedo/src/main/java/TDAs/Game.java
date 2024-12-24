@@ -3,7 +3,7 @@ package TDAs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements IGame{
     private Player player1;
     private Player player2;
     private Board board;
@@ -14,18 +14,18 @@ public class Game {
      * RF12 - Constructor para crear una nueva partida.
      */
 
-    public Game(Player player1, Player player2, Board board, Player currentplayer) {
+    public Game(Player player1, Player player2, Board board, Player currentplayer ) {
         this.player1 = player1;
         this.player2 = player2;
         this.board = new Board();
         this.currentplayer = currentplayer;
         this.history = new ArrayList<>();
     }
-
     /**
      * RF13 - Genera un historial de movimientos de la partida.
+     * @return Lista con el historial de movimientos
      */
-
+    @Override
     public List<String> getHistory() {
         List<String> enumeratedHistory = new ArrayList<>();
         for (int i = 0; i < history.size(); i++) {
@@ -37,6 +37,7 @@ public class Game {
     /**
      * RF14 - Metodo que verifica si el estado actual del juego es empate
      */
+    @Override
     public boolean esEmpate() {
         // Verificar si ambos jugadores se quedaron sin fichas
         if (player1.getRemainingPieces() == 0 && player2.getRemainingPieces() == 0) {
@@ -50,10 +51,10 @@ public class Game {
 
         return false;
     }
-
     /**
      * RF16 - Selector que obtiene el estado actual del jugador cuyo turno esta en curso el juego
      */
+    @Override
     public Player getCurrentplayer() {
         return currentplayer;
     }
@@ -61,6 +62,7 @@ public class Game {
     /**
      * RF17 - Selector que obtiene el estado actual del tablero en el juego
      */
+    @Override
     public Board boardGetState() {
         return this.board;
     }
@@ -71,6 +73,7 @@ public class Game {
      jugadas.
 
      */
+    @Override
     public void endGame() {
         if (esEmpate()) {
             player1.actualizarEstadisticas("draws");
@@ -96,6 +99,8 @@ public class Game {
         // jugador actual null luego de termianada partida
         currentplayer = null;
     }
+
+    @Override
     /**
      * RF19 - Método que realiza un movimiento en el juego.
      */
@@ -137,7 +142,7 @@ public class Game {
         player.removePiece();
 
         // Actualizar el historial de movimientos
-        history.add(player.getName() + " jugó en la columna " + (column +1));
+        history.add(player.getName() + " jugo en la columna " + (column +1));
 
         // Verificar si hay un ganador o si el juego ha terminado en empate
         String ganador = board.entregarGanador();
@@ -151,3 +156,4 @@ public class Game {
 
 
 }
+
