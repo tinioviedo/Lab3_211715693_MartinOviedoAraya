@@ -32,19 +32,13 @@ public class Player {
     }
     //Metodos
 
-    /**
-     * RF15 - Actualiza las estadísticas del jugador ya sea victoria, derrota o empate
-     */
-    public void actualizarEstadisticas(String resultado) {
-        if ("wins".equals(resultado)) {
-            this.wins++;
-        } else if ("losses".equals(resultado)) {
-            this.losses++;
-        } else if ("draws".equals(resultado)) {
-            this.draws++;
-        }
-    }
 
+
+    @Override
+    public String toString() {
+        return String.format("Jugador [ID: %d, Nombre: %s, Color: %s, Fichas: %d, Victorias: %d, Derrotas: %d, Empates: %d]",
+                id, name, color, remainingPieces, wins, losses, draws);
+    }
     //Getters
     public String getName() {
         return name;
@@ -75,5 +69,32 @@ public class Player {
     }
 
     //setters
+    /**
+     * RF15 - Actualiza las estadísticas del jugador ya sea victoria, derrota o empate
+     */
+    public void actualizarEstadisticas(String resultado) {
+        if ("wins".equals(resultado)) {
+            this.wins++;
+        } else if ("losses".equals(resultado)) {
+            this.losses++;
+        } else if ("draws".equals(resultado)) {
+            this.draws++;
+        }
+    }
 
+    // Método para restar una pieza al jugador
+    public void removePiece() {
+        if (remainingPieces > 0) {
+            remainingPieces--; // Restamos 1 pieza
+        } else {
+            throw new IllegalStateException("El jugador no tiene fichas restantes");
+        }
+
+    }
 }
+
+
+
+
+
+

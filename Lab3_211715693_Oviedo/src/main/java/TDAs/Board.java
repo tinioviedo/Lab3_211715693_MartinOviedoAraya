@@ -24,7 +24,13 @@ public class Board {
         }
     }
 
-
+    /*@Override
+    public String toString() {
+        return "Board{" +
+                "board=" + board +
+                '}';
+    }*/
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (List<Piece> row : board) {
@@ -52,7 +58,6 @@ public class Board {
         }
         return false;  // no encuentra un espacio vacio , retorna falso
     }
-
     /**
      * RF07
      * Método para jugar una ficha en el tablero.
@@ -65,21 +70,20 @@ public class Board {
         }
 
         for (int row = 5; row >= 0; row--) {
-            if (board.get(row).get(column) == null) {
-                ;
+            if (board.get(row).get(column) == null) {;
                 board.get(row).set(column, piece);
                 return true;
             }
         }
         return false;
     }
-
     /**
      * Método auxiliar para obtener la pieza en una posición
      */
     private Piece getPosition(int row, int col) {
         return board.get(row).get(col);
     }
+
 
     /**
      * RF08
@@ -113,7 +117,6 @@ public class Board {
         }
         return "No hay ganador";
     }
-
     /**
      * RF09
      * Método para verificar si hay una victoria horizontal en el tablero.
@@ -216,4 +219,21 @@ public class Board {
 
         return "No hay ganador";
     }
+
+    /**
+     * Método para verificar si se puede jugar en la columna especificada.
+     * @param column La columna donde el jugador intenta colocar una ficha.
+     * @return true si hay espacio en la columna para colocar una ficha, false si no.
+     */
+    public boolean sePuedeJugarEnColumna(int column) {
+        // Verificar si la columna es válida
+        if (column < 0 || column >= 7) {
+            return false;  // Columna inválida
+        }
+
+        // Comprobar si la posición más alta de la columna está vacía (fila 0)
+        return board.get(0).get(column) == null;
+    }
+
+
 }

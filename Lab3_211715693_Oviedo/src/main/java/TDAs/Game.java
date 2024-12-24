@@ -96,4 +96,58 @@ public class Game {
         // jugador actual null luego de termianada partida
         currentplayer = null;
     }
+    /**
+     * RF19 - Método que realiza un movimiento en el juego.
+     */
+    public void realizarMovimiento(Player player, int column) {
+        // Verificar que sea el turno del jugador correcto
+        if (player != currentplayer) {
+            throw new IllegalArgumentException("No es el turno del jugador actual");
+        }
+
+        // Verificar si hay un juego en curso
+        if (currentplayer == null) {
+            throw new IllegalStateException("El juego ya ha terminado");
+        }
+
+        // Verificar si el jugador tiene fichas restantes
+        if (player.getRemainingPieces() == 0) {
+            throw new IllegalArgumentException("El jugador no tiene fichas restantes");
+        }
+
+        // Verificar si la columna es válida
+        if (column < 0 || column >= 7) {
+            throw new IllegalArgumentException("Columna inválida");
+        }
+
+        // Verificar si se puede jugar en la columna
+        if (!board.sePuedeJugarEnColumna(column)) {
+            throw new IllegalArgumentException("No se puede jugar en la columna seleccionada");
+        }
+
+        // Obtener la ficha del jugador y jugarla
+        Piece piece = new Piece(player.getColor());
+        boolean jugadaExitosa = board.jugarFicha(column, piece);
+
+        if (!jugadaExitosa) {
+            throw new IllegalStateException("No se pudo colocar la ficha en la columna " + column);
+        }
+
+        // Disminuir la cantidad de fichas del jugador
+        player.removePiece();
+
+        // Actualizar el historial de movimientos
+        history.add(player.getName() + " jugó en la columna " + (column +1));
+
+        // Verificar si hay un ganador o si el juego ha terminado en empate
+        String ganador = board.entregarGanador();
+        if (!"No hay ganador".equals(ganador) || esEmpate()) {
+            endGame();
+        } else {
+            // Solo cambiar el turno si el juego no ha terminado
+            currentplayer = (currentplayer == player1) ? player2 : player1;
+        }
+    }
+
+
 }
