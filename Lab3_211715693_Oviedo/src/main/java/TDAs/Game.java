@@ -50,4 +50,50 @@ public class Game {
 
         return false;
     }
+
+    /**
+     * RF16 - Selector que obtiene el estado actual del jugador cuyo turno esta en curso el juego
+     */
+    public Player getCurrentplayer() {
+        return currentplayer;
+    }
+
+    /**
+     * RF17 - Selector que obtiene el estado actual del tablero en el juego
+     */
+    public Board boardGetState() {
+        return this.board;
+    }
+
+    /**
+     * RF18 - Método que finaliza el juego
+     actualizando las estadísticas de los jugadores según el resultado y no permitiendo futuras
+     jugadas.
+
+     */
+    public void endGame() {
+        if (esEmpate()) {
+            player1.actualizarEstadisticas("draws");
+            player2.actualizarEstadisticas("draws");
+        } else {
+            // Determinar ganador y perdedor basado en el color
+            Player winner;
+            Player loser;
+
+            if (board.entregarGanador().equals("red")) {
+                winner = player1;
+                loser = player2;
+            } else {
+                winner = player2;
+                loser = player1;
+            }
+
+            //actualizar estadisticas
+            winner.actualizarEstadisticas("wins");
+            loser.actualizarEstadisticas("losses");
+        }
+
+        // jugador actual null luego de termianada partida
+        currentplayer = null;
+    }
 }
