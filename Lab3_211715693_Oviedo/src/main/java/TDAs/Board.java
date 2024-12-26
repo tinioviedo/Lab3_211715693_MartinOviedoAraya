@@ -3,12 +3,21 @@ package TDAs;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa el tablero de juego de Conecta 4.
+ * El tablero está compuesto por una lista de listas, donde cada elemento puede ser una ficha o un espacio vacío.
+ * Incluye métodos para gestionar el estado del tablero y verificar condiciones de victoria.
+ * @author Martín Oviedo
+ * @version 1.0
+ * @since 2024-12-24
+ */
+
 public class Board implements IBoard {
     private List<List<Piece>> board;
 
     /**
-     * RF05
-     * Constructor para crear un tablero vacío.
+     * Constructor para inicializar un tablero vacío.
+     * RF05 - Crea un tablero con 6 filas y 7 columnas, todas inicialmente vacías.
      */
 
 
@@ -24,12 +33,11 @@ public class Board implements IBoard {
         }
     }
 
-    /*@Override
-    public String toString() {
-        return "Board{" +
-                "board=" + board +
-                '}';
-    }*/
+    /**
+     * Devuelve una representación en texto del tablero.
+     * Cada celda vacía se representa con un guion (-), y las celdas ocupadas muestran la inicial del color de la ficha.
+     * @return una cadena que representa el tablero de juego
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -47,8 +55,9 @@ public class Board implements IBoard {
     }
 
     /**
-     * RF06
-     * Método para verificar si se puede jugar.
+     * Verifica si es posible seguir jugando en el tablero.
+     * RF06 - Recorre todas las celdas del tablero buscando al menos un espacio vacío.
+     * @return true si hay espacios vacíos, false si el tablero está lleno
      */
     @Override
     public boolean sePuedeJugar() {
@@ -60,8 +69,11 @@ public class Board implements IBoard {
         return false;  // no encuentra un espacio vacio , retorna falso
     }
     /**
-     * RF07
-     * Método para jugar una ficha en el tablero.
+     * Juega una ficha en la columna especificada.
+     * RF07 - Intenta colocar una ficha en la columna dada, comenzando desde la fila más baja.
+     * @param column la columna donde se intentará colocar la ficha
+     * @param piece  la ficha que se desea colocar
+     * @return true si la ficha se colocó con éxito, false si la columna está llena o es inválida
      */
     @Override
     public boolean jugarFicha(int column, Piece piece) {
@@ -80,17 +92,20 @@ public class Board implements IBoard {
         return false;
     }
     /**
-     * Método auxiliar para obtener la pieza en una posición
+     * Obtiene la ficha en una posición específica del tablero.
+     * @param row la fila de la posición
+     * @param col la columna de la posición
+     * @return la ficha en la posición especificada, o null si está vacía
      */
-
     private Piece getPosition(int row, int col) {
         return board.get(row).get(col);
     }
 
 
     /**
-     * RF08
-     * Método para verificar si hay una victoria vertical en el tablero.
+     * Verifica si hay una victoria vertical en el tablero.
+     * RF08 - Comprueba cada columna en busca de 4 fichas consecutivas del mismo color.
+     * @return el color del jugador que ganó, o "No hay ganador" si no hay victoria
      */
     @Override
     public String verificarVictoriaVertical() {
@@ -122,8 +137,9 @@ public class Board implements IBoard {
         return "No hay ganador";
     }
     /**
-     * RF09
-     * Método para verificar si hay una victoria horizontal en el tablero.
+     * Verifica si hay una victoria horizontal en el tablero.
+     * RF09 - Comprueba cada fila en busca de 4 fichas consecutivas del mismo color.
+     * @return el color del jugador que ganó, o "No hay ganador" si no hay victoria
      */
     @Override
     public String verificarVictoriaHorizontal() {
@@ -153,7 +169,9 @@ public class Board implements IBoard {
         return "No hay ganador";
     }
     /**
-     * RF10 - Método para verificar si hay una victoria diagonal en el tablero.
+     * Verifica si hay una victoria diagonal en el tablero.
+     * RF10 - Comprueba diagonales ascendentes y descendentes en busca de 4 fichas consecutivas del mismo color.
+     * @return el color del jugador que ganó, o "No hay ganador" si no hay victoria
      */
     @Override
     public String verificarVictoriaDiagonal() {
@@ -205,7 +223,9 @@ public class Board implements IBoard {
     }
 
     /**
-     * RF11 - Método para entregar el ganador verificando todas las posibles condiciones de victoria.
+     * Determina el ganador verificando todas las condiciones de victoria.
+     * RF11 - Integra las verificaciones de victoria vertical, horizontal y diagonal.
+     * @return el color del jugador ganador, o "No hay ganador" si nadie ha ganado
      */
     @Override
     public String entregarGanador() {

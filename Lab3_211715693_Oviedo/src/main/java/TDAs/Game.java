@@ -12,6 +12,10 @@ public class Game implements IGame{
 
     /**
      * RF12 - Constructor para crear una nueva partida.
+     * @param player1 El primer jugador de la partida.
+     * @param player2 El segundo jugador de la partida.
+     * @param board El tablero de juego.
+     * @param currentplayer El jugador que comenzará la partida.
      */
 
     public Game(Player player1, Player player2, Board board, Player currentplayer ) {
@@ -23,7 +27,7 @@ public class Game implements IGame{
     }
     /**
      * RF13 - Genera un historial de movimientos de la partida.
-     * @return Lista con el historial de movimientos
+     * @return Una lista con el historial de movimientos, enumerados.
      */
     @Override
     public List<String> getHistory() {
@@ -35,24 +39,22 @@ public class Game implements IGame{
     }
 
     /**
-     * RF14 - Metodo que verifica si el estado actual del juego es empate
+     * RF14 - Método que verifica si el estado actual del juego es empate.
+     * @return true si el juego ha terminado en empate, false si no.
      */
     @Override
     public boolean esEmpate() {
-        // Verificar si ambos jugadores se quedaron sin fichas
-        if (player1.getRemainingPieces() == 0 && player2.getRemainingPieces() == 0) {
-            return true;
+        // Primero se tiene que  verificar que no haya un ganador, pq se puede dar el caso de que ganen y queden sin fichas
+        if (!"No hay ganador".equals(board.entregarGanador())) {
+            return false;
         }
 
-        // Verificar si el tablero está lleno (no se pueden realizar más jugadas)
-        if (!board.sePuedeJugar()) {
-            return true;
-        }
-
-        return false;
+        // Luego verificar si ambos jugadores se quedaron sin fichas o si el tablero está lleno
+        return (player1.getRemainingPieces() == 0 && player2.getRemainingPieces() == 0) || !board.sePuedeJugar();
     }
     /**
-     * RF16 - Selector que obtiene el estado actual del jugador cuyo turno esta en curso el juego
+     * RF16 - Selector que obtiene el estado actual del jugador cuyo turno está en curso en el juego.
+     * @return El jugador cuyo turno está en curso.
      */
     @Override
     public Player getCurrentplayer() {
@@ -60,7 +62,8 @@ public class Game implements IGame{
     }
 
     /**
-     * RF17 - Selector que obtiene el estado actual del tablero en el juego
+     * RF17 - Selector que obtiene el estado actual del tablero en el juego.
+     * @return El tablero de juego actual.
      */
     @Override
     public Board boardGetState() {
@@ -68,10 +71,8 @@ public class Game implements IGame{
     }
 
     /**
-     * RF18 - Método que finaliza el juego
-     actualizando las estadísticas de los jugadores según el resultado y no permitiendo futuras
-     jugadas.
-
+     * RF18 - Método que finaliza el juego actualizando las estadísticas de los jugadores
+     * según el resultado y no permitiendo futuras jugadas.
      */
     @Override
     public void endGame() {
@@ -99,10 +100,32 @@ public class Game implements IGame{
         // jugador actual null luego de termianada partida
         currentplayer = null;
     }
+    public void endGame(Player quitter) {
+        if (quitter != null) {
+            // Si un jugador se retira, el otro es automáticamente el ganador
+            Player winner = (quitter == player1) ? player2 : player1;
+
+            // Actualizar estadísticas
+            winner.actualizarEstadisticas("wins");
+            quitter.actualizarEstadisticas("losses");
+
+            System.out.println("El jugador " + quitter.getName() + " se ha retirado.");
+            System.out.println("El ganador es: " + winner.getName());
+        }
+
+        // Finalizar el juego
+        currentplayer = null;
+    }
+
 
     @Override
     /**
      * RF19 - Método que realiza un movimiento en el juego.
+     * @param player El jugador que realiza el movimiento.
+     * @param column La columna donde el jugador intenta colocar una ficha.
+     * @throws IllegalArgumentException Si no es el turno del jugador, si el jugador no tiene fichas restantes,
+     * si la columna es inválida o si no se puede jugar en la columna seleccionada.
+     * @throws IllegalStateException Si el juego ha terminado o no se pudo colocar la ficha.
      */
     public void realizarMovimiento(Player player, int column) {
         // Verificar que sea el turno del jugador correcto
@@ -142,18 +165,19 @@ public class Game implements IGame{
         player.removePiece();
 
         // Actualizar el historial de movimientos
-        history.add(player.getName() + " jugo en la columna " + (column +1));
+        history.add(player.getName() + " jugo en la columna " + (column + 1));
 
         // Verificar si hay un ganador o si el juego ha terminado en empate
         String ganador = board.entregarGanador();
-        if (!"No hay ganador".equals(ganador) || esEmpate()) {
+        if (!"No hay ganador".equals(ganador)) {
+            endGame();
+        } else if (esEmpate()) {
             endGame();
         } else {
             // Solo cambiar el turno si el juego no ha terminado
             currentplayer = (currentplayer == player1) ? player2 : player1;
         }
     }
-
 
 }
 
