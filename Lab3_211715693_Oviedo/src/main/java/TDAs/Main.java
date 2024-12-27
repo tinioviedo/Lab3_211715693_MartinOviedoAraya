@@ -3,6 +3,12 @@ package TDAs;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Clase principal para ejecutar el programa del juego conecta 4
+ * @author Martín Oviedo
+ * @version 1.0
+ */
+
 public class Main {
 
     public static void main(String[] args) {
@@ -64,8 +70,8 @@ public class Main {
     }
 
     private static void menuJuego(Scanner scanner) {
-        Player player1 = null;
-        Player player2 = null;
+        Player_21171569_OviedoAraya player1 = null;
+        Player_21171569_OviedoAraya player2 = null;
         boolean firstGame = true;
         boolean continuePlaying = true;
 
@@ -79,9 +85,9 @@ public class Main {
                 System.out.print("Ingrese nombre del jugador 1: ");
                 String nombreJ1 = scanner.nextLine();
                 System.out.println("Nombre registrado correctamente: " + nombreJ1);
-                Piece redPiece;
+                Piece_21171569_OviedoAraya redPiece;
                 try {
-                    redPiece = new Piece("red");
+                    redPiece = new Piece_21171569_OviedoAraya("red");
                     System.out.println("Color asignado: " + redPiece.getColor());
                 } catch (IllegalArgumentException e) {
                     System.out.println("Error al asignar color: " + e.getMessage());
@@ -94,9 +100,9 @@ public class Main {
                 System.out.print("Ingrese nombre del jugador 2: ");
                 String nombreJ2 = scanner.nextLine();
                 System.out.println("Nombre registrado correctamente: " + nombreJ2);
-                Piece yellowPiece;
+                Piece_21171569_OviedoAraya yellowPiece;
                 try {
-                    yellowPiece = new Piece("yellow");
+                    yellowPiece = new Piece_21171569_OviedoAraya("yellow");
                     System.out.println("Color asignado: " + yellowPiece.getColor());
                 } catch (IllegalArgumentException e) {
                     System.out.println("Error al asignar color: " + e.getMessage());
@@ -112,8 +118,8 @@ public class Main {
                         remainingPieces = scanner.nextInt();
                         scanner.nextLine(); //
                         if (remainingPieces >= 4 && remainingPieces <= 21) {
-                            player1 = new Player(1, nombreJ1, redPiece.getColor(), 0, 0, 0, remainingPieces);
-                            player2 = new Player(2, nombreJ2, yellowPiece.getColor(), 0, 0, 0, remainingPieces);
+                            player1 = new Player_21171569_OviedoAraya(1, nombreJ1, redPiece.getColor(), 0, 0, 0, remainingPieces);
+                            player2 = new Player_21171569_OviedoAraya(2, nombreJ2, yellowPiece.getColor(), 0, 0, 0, remainingPieces);
                             System.out.println("Numero de fichas asignado correctamente: " + remainingPieces);
                             piecesValidas = true;
                         } else {
@@ -126,7 +132,7 @@ public class Main {
                 }
                 System.out.println("\nCreando nueva partida...");
                 System.out.println("\n1. Creando tablero inicial...");
-                Board newBoard = new Board();
+                Board_21171569_OviedoAraya newBoard = new Board_21171569_OviedoAraya();
                 System.out.println("Tablero creado exitosamente:");
                 System.out.println(newBoard.toString()); // Muestra el tablero vacío inicial
 
@@ -139,8 +145,8 @@ public class Main {
                 // Solicitar nuevo número de fichas para una nueva partida
                 try {
                     System.out.println("\n--- Configurando nueva partida ---");
-                    Piece redPiece = new Piece("red");
-                    Piece yellowPiece = new Piece("yellow");
+                    Piece_21171569_OviedoAraya redPiece = new Piece_21171569_OviedoAraya("red");
+                    Piece_21171569_OviedoAraya yellowPiece = new Piece_21171569_OviedoAraya("yellow");
                     System.out.println("Fichas creadas correctamente");
 
                     System.out.println("\n--- Nueva partida ---");
@@ -153,9 +159,9 @@ public class Main {
                             newRemainingPieces = scanner.nextInt();
                             scanner.nextLine(); // Limpiar buffer
                             if (newRemainingPieces >= 4 && newRemainingPieces <= 21) {
-                                player1 = new Player(1, player1.getName(), redPiece.getColor(), player1.getWins(),
+                                player1 = new Player_21171569_OviedoAraya(1, player1.getName(), redPiece.getColor(), player1.getWins(),
                                         player1.getLosses(), player1.getDraws(), newRemainingPieces);
-                                player2 = new Player(2, player2.getName(), yellowPiece.getColor(), player2.getWins(),
+                                player2 = new Player_21171569_OviedoAraya(2, player2.getName(), yellowPiece.getColor(), player2.getWins(),
                                         player2.getLosses(), player2.getDraws(), newRemainingPieces);
                                 System.out.println("Numero de fichas actualizado correctamente: " + newRemainingPieces);
                                 piecesValidas = true;
@@ -181,11 +187,11 @@ public class Main {
                 // Sorteo inicial
                 System.out.println("\nRealizando sorteo para determinar quien comienza...");
                 Random random = new Random();
-                Player jugadorInicial = random.nextBoolean() ? player1 : player2;
+                Player_21171569_OviedoAraya jugadorInicial = random.nextBoolean() ? player1 : player2;
                 System.out.println("¡El sorteo ha terminado!");
 
                 // Crear juego
-                Game game = new Game(player1, player2, null, jugadorInicial);
+                Game_21171569_OviedoAraya game = new Game_21171569_OviedoAraya(player1, player2, null, jugadorInicial);
                 System.out.println("\n¡Juego creado exitosamente!");
                 System.out.println("Inicia: " + jugadorInicial.getName() + " (" + jugadorInicial.getColor() + ")");
 
@@ -224,7 +230,7 @@ public class Main {
 
                                 if (confirmacion.equals("S")) {
                                     // Identificar al jugador que se retira
-                                    Player jugadorActual = game.getCurrentplayer();
+                                    Player_21171569_OviedoAraya jugadorActual = game.getCurrentplayer();
                                     if (jugadorActual != null) {
                                         System.out.println("El jugador " + jugadorActual.getName() + " se ha retirado.");
                                         // Finalizar el juego indicando quién se retiró
@@ -282,8 +288,8 @@ public class Main {
         }
     }
 
-    private static void realizarJugada(Game game, Scanner scanner) {
-        Player jugadorActual = game.getCurrentplayer();
+    private static void realizarJugada(Game_21171569_OviedoAraya game, Scanner scanner) {
+        Player_21171569_OviedoAraya jugadorActual = game.getCurrentplayer();
         if (jugadorActual == null) {
             System.out.println("El juego ya ha terminado.");
             return;
@@ -327,7 +333,7 @@ public class Main {
         }
     }
 
-    private static void mostrarEstadoActual(Game game) {
+    private static void mostrarEstadoActual(Game_21171569_OviedoAraya game) {
         System.out.println("\n+------------------------+");
         System.out.println("|    ESTADO DEL JUEGO    |");
         System.out.println("+------------------------+");
@@ -351,7 +357,7 @@ public class Main {
         System.out.println("+------------------------+");
     }
 
-    private static void mostrarEstadisticas(Player player1, Player player2) {
+    private static void mostrarEstadisticas(Player_21171569_OviedoAraya player1, Player_21171569_OviedoAraya player2) {
         System.out.println("\n=== Estadisticas Actuales ===");
         System.out.println("Jugador #" + player1.getId() + " - " + player1.getName() + " (" + player1.getColor() + "):");
         System.out.println("- Victorias: " + player1.getWins());
@@ -365,7 +371,7 @@ public class Main {
         System.out.println("- Empates: " + player2.getDraws());
         System.out.println("- Fichas restantes: " + player2.getRemainingPieces());
     }
-    private static void mostrarHistorial(Game game) {
+    private static void mostrarHistorial(Game_21171569_OviedoAraya game) {
         java.util.List<String> historial = game.getHistory();
         if (historial.isEmpty()) {
             System.out.println("No hay movimientos registrados.");
@@ -376,7 +382,7 @@ public class Main {
         }
     }
 
-    private static void menuAnalisisTablero(Game game, Scanner scanner) {
+    private static void menuAnalisisTablero(Game_21171569_OviedoAraya game, Scanner scanner) {
         boolean analizando = true;
         while (analizando) {
             System.out.println("\n=== Analisis del Tablero ===");

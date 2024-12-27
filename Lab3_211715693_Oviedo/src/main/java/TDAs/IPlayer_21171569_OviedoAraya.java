@@ -1,6 +1,14 @@
 package TDAs;
 
-public interface IPlayer {
+/**
+ * Interfaz que define las propiedades y comportamientos de un jugador.
+ * Incluye información personal, estadísticas y gestión de fichas.
+ *
+ * @author Martín Oviedo
+ * @version 1.0
+ */
+
+public interface IPlayer_21171569_OviedoAraya {
     String toString();
     String getName();
     int getId();

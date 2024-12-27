@@ -1,20 +1,30 @@
 package TDAs;
 
 /**
- * Representa un jugador en el juego, con atributos como ID, nombre, color y estadísticas del juego.
+ * Representa un jugador en el juego, con atributos como ID, nombre, color y estadisticas del juego.
  * Cada jugador tiene un ID, nombre, color y registra sus victorias, derrotas, empates y fichas restantes.
  * @author Martín Oviedo
- * @since 2024-12-24
+ * @version 1.0
  */
 
-public class Player implements IPlayer{
+public class Player_21171569_OviedoAraya implements IPlayer_21171569_OviedoAraya {
     //atributos
+    /** Identificador único del jugador */
     private int id;
+    /** Nombre del jugador */
     private String name;
+    /** Color asignado al jugador ("red" o "yellow") */
     private String color;
+    /** Número de partidas ganadas por el jugador */
     private int wins;
+    /** Número de partidas perdidas por el jugador */
     private int losses;
+    /** Número de partidas empatadas por el jugador */
     private int draws;
+    /**
+     * Número de fichas restantes del jugador en la partida actual.
+     * Debe estar entre 4 y 21.
+     */
     private int remainingPieces;
 
     /**
@@ -30,7 +40,7 @@ public class Player implements IPlayer{
      * @throws IllegalArgumentException si el id es negativo o las fichas restantes están fuera del rango 4-21
      */
 
-    public Player(int id, String name, String color, int wins, int losses, int draws, int remainingPieces) {
+    public Player_21171569_OviedoAraya(int id, String name, String color, int wins, int losses, int draws, int remainingPieces) {
         if (id<0){
             throw new IllegalArgumentException("El ID del player no puede ser negativo");
         }

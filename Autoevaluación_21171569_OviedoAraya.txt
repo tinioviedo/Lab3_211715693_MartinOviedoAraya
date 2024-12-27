@@ -1,0 +1,54 @@
+Autoevaluación Martín Oviedo Araya
+
+0: No realizado.
+0.25: Implementación con problemas mayores (funciona 25% de las veces o no funciona)
+0.5: Implementación con funcionamiento irregular (funciona 50% de las veces)
+0.75: Implementación con problemas menores (funciona 75% de las veces)
+1: Implementación completa sin problemas (funciona 100% de las veces)
+
+
+
+
+
+RNF
+RNF1. (obligatorio) Autoevaluación                                    1
+RNF2. (obligatorio) Lenguaje y herramientas de trabajo                1                                          
+RNF3. La implementación de este laboratorio debe usar un SDK preciso  1                               
+RNF4. Se debe utilizar el IDE IntelliJ IDEA Community Edition 2024.1  1                                       
+RNF5. integrar a su proyecto la herramienta Gradle                    1
+RNF6. (obligatorio) Interacciones con el programa                     1
+RNF7. (obligatorio) Uso del paradigma                                 1 
+RNF8. (obligatorio) Prerrequesitos                                    1           
+RNF9. (obligatorio) Documentación JavaDoc                             1 
+RNF10 Organización del código:                                        1
+RNF11 Diagrama de análisis:                                           1
+RNF12 Diagrama de diseño:                                             1
+RNF13 Uso de git                                                      1
+
+
+
+
+
+
+
+
+RF01. Clases y estructuras que forman el programa                     1
+RF02. Menú interactivo por terminal                                   1                                        
+RF03. (0.1 pts) TDA Player - constructor.                             1
+RF04. (0.1 pts) TDA Piece - constructor.                              1
+RF05. (0.2 pts) TDA Board - constructor.                              1
+RF06. (0.1 pts) TDA Board - otros - sePuedeJugar?                     1
+RF07. (0.1 pts) TDA Board - modificador - jugar ficha                 1
+RF08. (0.2 pts) TDA Board - otros - verificar victoria vertical       1
+RF09 (0.1 pts) TDA Board - otros - verificar victoria horizontal      1
+RF10. (0.3 pts) TDA Board - otros - verificar victoria diagonal       1
+RF11. (0.1 pts) TDA Board - otros - entregarGanador                   1
+RF12. (0.1 pts) TDA Game - constructor                                1                            
+RF13. (0.1 pts) TDA Game - otros - history                            1 
+RF14. (0.1 pts) TDA Game - otros - esEmpate                           1
+RF15. (0.1 pts) TDA Player - otros - actualizarEstadisticas           1
+RF16. (0.1 pts) TDA Game - selector - getCurrentPlayer                1
+RF17. (0.1 pts) TDA Game - selector - boardGetState                   1
+RF18. (0.1 pts) TDA Game - modificador - endGame                      1 
+RF19. (3,5 pts) TDA Game - modificador - realizarMovimiento           1
+RF20. 

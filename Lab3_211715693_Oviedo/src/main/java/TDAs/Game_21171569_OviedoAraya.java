@@ -3,11 +3,21 @@ package TDAs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements IGame{
-    private Player player1;
-    private Player player2;
-    private Board board;
-    private Player currentplayer;
+/**
+ * Gestiona la logica central y el estado del juego Conecta 4.
+ * @author Martín Oviedo
+ * @version 1.0
+ */
+public class Game_21171569_OviedoAraya implements IGame_21171569_OviedoAraya {
+    /** Jugador 1 de la partida, usa fichas rojas */
+    private Player_21171569_OviedoAraya player1;
+    /** Jugador 2 de la partida, usa fichas amarillas */
+    private Player_21171569_OviedoAraya player2;
+    /** Tablero actual del juego */
+    private Board_21171569_OviedoAraya board;
+    /** Referencia al jugador que tiene el turno actual */
+    private Player_21171569_OviedoAraya currentplayer;
+    /** Lista que almacena el historial de movimientos de la partida */
     private List<String> history;
 
     /**
@@ -18,10 +28,10 @@ public class Game implements IGame{
      * @param currentplayer El jugador que comenzará la partida.
      */
 
-    public Game(Player player1, Player player2, Board board, Player currentplayer ) {
+    public Game_21171569_OviedoAraya(Player_21171569_OviedoAraya player1, Player_21171569_OviedoAraya player2, Board_21171569_OviedoAraya board, Player_21171569_OviedoAraya currentplayer ) {
         this.player1 = player1;
         this.player2 = player2;
-        this.board = new Board();
+        this.board = new Board_21171569_OviedoAraya();
         this.currentplayer = currentplayer;
         this.history = new ArrayList<>();
     }
@@ -57,7 +67,7 @@ public class Game implements IGame{
      * @return El jugador cuyo turno está en curso.
      */
     @Override
-    public Player getCurrentplayer() {
+    public Player_21171569_OviedoAraya getCurrentplayer() {
         return currentplayer;
     }
 
@@ -66,7 +76,7 @@ public class Game implements IGame{
      * @return El tablero de juego actual.
      */
     @Override
-    public Board boardGetState() {
+    public Board_21171569_OviedoAraya boardGetState() {
         return this.board;
     }
 
@@ -81,8 +91,8 @@ public class Game implements IGame{
             player2.actualizarEstadisticas("draws");
         } else {
             // Determinar ganador y perdedor basado en el color
-            Player winner;
-            Player loser;
+            Player_21171569_OviedoAraya winner;
+            Player_21171569_OviedoAraya loser;
 
             if (board.entregarGanador().equals("red")) {
                 winner = player1;
@@ -100,10 +110,10 @@ public class Game implements IGame{
         // jugador actual null luego de termianada partida
         currentplayer = null;
     }
-    public void endGame(Player quitter) {
+    public void endGame(Player_21171569_OviedoAraya quitter) {
         if (quitter != null) {
             // Si un jugador se retira, el otro es automáticamente el ganador
-            Player winner = (quitter == player1) ? player2 : player1;
+            Player_21171569_OviedoAraya winner = (quitter == player1) ? player2 : player1;
 
             // Actualizar estadísticas
             winner.actualizarEstadisticas("wins");
@@ -127,7 +137,7 @@ public class Game implements IGame{
      * si la columna es inválida o si no se puede jugar en la columna seleccionada.
      * @throws IllegalStateException Si el juego ha terminado o no se pudo colocar la ficha.
      */
-    public void realizarMovimiento(Player player, int column) {
+    public void realizarMovimiento(Player_21171569_OviedoAraya player, int column) {
         // Verificar que sea el turno del jugador correcto
         if (player != currentplayer) {
             throw new IllegalArgumentException("No es el turno del jugador actual");
@@ -154,7 +164,7 @@ public class Game implements IGame{
         }
 
         // Obtener la ficha del jugador y jugarla
-        Piece piece = new Piece(player.getColor());
+        Piece_21171569_OviedoAraya piece = new Piece_21171569_OviedoAraya(player.getColor());
         boolean jugadaExitosa = board.jugarFicha(column, piece);
 
         if (!jugadaExitosa) {

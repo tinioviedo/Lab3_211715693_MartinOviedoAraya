@@ -9,11 +9,15 @@ import java.util.List;
  * Incluye métodos para gestionar el estado del tablero y verificar condiciones de victoria.
  * @author Martín Oviedo
  * @version 1.0
- * @since 2024-12-24
  */
 
-public class Board implements IBoard {
-    private List<List<Piece>> board;
+public class Board_21171569_OviedoAraya implements IBoard_21171569_OviedoAraya {
+    /**
+     * Matriz que representa el tablero de juego.
+     * Lista de listas donde cada elemento es una Piece o null si está vacío.
+     * La estructura tiene 6 filas y 7 columnas.
+     */
+    private List<List<Piece_21171569_OviedoAraya>> board;
 
     /**
      * Constructor para inicializar un tablero vacío.
@@ -21,11 +25,11 @@ public class Board implements IBoard {
      */
 
 
-    public Board() {
+    public Board_21171569_OviedoAraya() {
         board = new ArrayList<>();
 
         for (int i = 0; i < 6; i++) {
-            List<Piece> row = new ArrayList<>();
+            List<Piece_21171569_OviedoAraya> row = new ArrayList<>();
             for (int j = 0; j < 7; j++) {
                 row.add(null);
             }
@@ -41,8 +45,8 @@ public class Board implements IBoard {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (List<Piece> row : board) {
-            for (Piece piece : row) {
+        for (List<Piece_21171569_OviedoAraya> row : board) {
+            for (Piece_21171569_OviedoAraya piece : row) {
                 if (piece == null) {
                     builder.append("- "); // Espacio vacío
                 } else {
@@ -61,7 +65,7 @@ public class Board implements IBoard {
      */
     @Override
     public boolean sePuedeJugar() {
-        for (List<Piece> row : board) {  // Recorremos cada fila del tablero
+        for (List<Piece_21171569_OviedoAraya> row : board) {  // Recorremos cada fila del tablero
             if (row.contains(null)) {  // Si hay un espacio vacio en la fila
                 return true;
             }
@@ -76,7 +80,7 @@ public class Board implements IBoard {
      * @return true si la ficha se colocó con éxito, false si la columna está llena o es inválida
      */
     @Override
-    public boolean jugarFicha(int column, Piece piece) {
+    public boolean jugarFicha(int column, Piece_21171569_OviedoAraya piece) {
 
         // Verificar si la columna es válida
         if (column < 0 || column >= 7) {
@@ -97,7 +101,7 @@ public class Board implements IBoard {
      * @param col la columna de la posición
      * @return la ficha en la posición especificada, o null si está vacía
      */
-    private Piece getPosition(int row, int col) {
+    private Piece_21171569_OviedoAraya getPosition(int row, int col) {
         return board.get(row).get(col);
     }
 
@@ -113,14 +117,14 @@ public class Board implements IBoard {
         for (int col = 0; col < 7; col++) {
             // Verificar secuencias de 4 desde la fila 0 hasta la 2
             for (int row = 0; row <= 2; row++) {
-                Piece actualPiece = getPosition(row, col);
+                Piece_21171569_OviedoAraya actualPiece = getPosition(row, col);
                 // Si la posición actual está vacía, continuar con la siguiente
                 if (actualPiece == null) continue;
 
                 // Obtener las siguientes piezas
-                Piece piece1 = getPosition(row + 1, col);
-                Piece piece2 = getPosition(row + 2, col);
-                Piece piece3 = getPosition(row + 3, col);
+                Piece_21171569_OviedoAraya piece1 = getPosition(row + 1, col);
+                Piece_21171569_OviedoAraya piece2 = getPosition(row + 2, col);
+                Piece_21171569_OviedoAraya piece3 = getPosition(row + 3, col);
 
                 // Verificar que ninguna sea null antes de comparar
                 if (piece1 == null || piece2 == null || piece3 == null) continue;
@@ -147,14 +151,14 @@ public class Board implements IBoard {
         for (int row = 0; row < 6; row++) {
             // Verificar secuencias de 4 en cada fila desde la columna 0 hasta la 3
             for (int col = 0; col <= 3; col++) {
-                Piece actualPiece = getPosition(row, col);
+                Piece_21171569_OviedoAraya actualPiece = getPosition(row, col);
                 // Si la posición actual está vacía, continuar con la siguiente
                 if (actualPiece == null) continue;
 
                 // Obtener las siguientes piezas
-                Piece piece1 = getPosition(row, col + 1);
-                Piece piece2 = getPosition(row, col + 2);
-                Piece piece3 = getPosition(row, col + 3);
+                Piece_21171569_OviedoAraya piece1 = getPosition(row, col + 1);
+                Piece_21171569_OviedoAraya piece2 = getPosition(row, col + 2);
+                Piece_21171569_OviedoAraya piece3 = getPosition(row, col + 3);
                 // Verificar que ninguna sea null antes de comparar
                 if (piece1 == null || piece2 == null || piece3 == null) continue;
 
@@ -178,14 +182,14 @@ public class Board implements IBoard {
         // Verificar diagonales ascendentes
         for (int row = 3; row < 6; row++) {
             for (int col = 0; col <= 3; col++) {
-                Piece actualPiece = getPosition(row, col);
+                Piece_21171569_OviedoAraya actualPiece = getPosition(row, col);
                 if (actualPiece == null) continue;
 
 
                 // Obtener las siguientes 3 piezas diagonales ascendentes
-                Piece diag1 = getPosition(row - 1, col + 1);
-                Piece diag2 = getPosition(row - 2, col + 2);
-                Piece diag3 = getPosition(row - 3, col + 3);
+                Piece_21171569_OviedoAraya diag1 = getPosition(row - 1, col + 1);
+                Piece_21171569_OviedoAraya diag2 = getPosition(row - 2, col + 2);
+                Piece_21171569_OviedoAraya diag3 = getPosition(row - 3, col + 3);
 
                 // Verificar que ninguna de las piezas sea null antes de comparar
                 if (diag1 == null || diag2 == null || diag3 == null) continue;
@@ -201,13 +205,13 @@ public class Board implements IBoard {
         // Verificar diagonales descendentes
         for (int row = 0; row <= 2; row++) {
             for (int col = 0; col <= 3; col++) {
-                Piece actualPiece = getPosition(row, col);
+                Piece_21171569_OviedoAraya actualPiece = getPosition(row, col);
                 if (actualPiece == null) continue;
 
                 // Obtener las siguientes 3 piezas diagonales descendentes
-                Piece diag1 = getPosition(row + 1, col + 1);
-                Piece diag2 = getPosition(row + 2, col + 2);
-                Piece diag3 = getPosition(row + 3, col + 3);
+                Piece_21171569_OviedoAraya diag1 = getPosition(row + 1, col + 1);
+                Piece_21171569_OviedoAraya diag2 = getPosition(row + 2, col + 2);
+                Piece_21171569_OviedoAraya diag3 = getPosition(row + 3, col + 3);
 
                 // Verificar que ninguna de las piezas sea null antes de comparar
                 if (diag1 == null || diag2 == null || diag3 == null) continue;
@@ -248,7 +252,7 @@ public class Board implements IBoard {
     }
 
     /**
-     * Método para verificar si se puede jugar en la columna especificada.
+     * metodo para verificar si se puede jugar en la columna especificada.
      * @param column La columna donde el jugador intenta colocar una ficha.
      * @return true si hay espacio en la columna para colocar una ficha, false si no.
      */
